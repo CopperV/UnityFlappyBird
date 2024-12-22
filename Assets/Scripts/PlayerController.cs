@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private CharacterController characterController;
     [SerializeField]
     private GameObject model;
 
@@ -37,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float fallAngleRotationSpeed = 1f;
 
+    [SerializeField]
     private Vector3 velocity = Vector3.zero;
 
     private void Awake()
@@ -50,7 +48,7 @@ public class PlayerController : MonoBehaviour
             jumpCooldownTimer -= Time.deltaTime;
 
         velocity.y -= gravity;
-        characterController.Move(velocity * Time.deltaTime);
+        Move(velocity * Time.deltaTime);
 
         if (velocity.y > 0)
             RotateCharacter(jumpAngleRotation, jumpAngleRotationSpeed * Time.deltaTime);
@@ -86,6 +84,11 @@ public class PlayerController : MonoBehaviour
         velocity.y = jumpForce;
 
         animator.SetTrigger(flapTrigger);
+    }
+
+    private void Move(Vector3 move)
+    {
+        transform.position += move;
     }
 
 }
