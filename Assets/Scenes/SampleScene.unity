@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4b90d78b19a7f489c6e1b9ea50f8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 3
+  scrollSpeed: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +634,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4846204745021538799, guid: ad6e8602905ea58468c5dfd0001cdcc2, type: 3}
+      propertyPath: maxDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846204745021538799, guid: ad6e8602905ea58468c5dfd0001cdcc2, type: 3}
+      propertyPath: minDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846204745021538799, guid: ad6e8602905ea58468c5dfd0001cdcc2, type: 3}
+      propertyPath: xPointSpawner
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846204745021538799, guid: ad6e8602905ea58468c5dfd0001cdcc2, type: 3}
+      propertyPath: obstaclePrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846204745021538799, guid: ad6e8602905ea58468c5dfd0001cdcc2, type: 3}
+      propertyPath: obstaclePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 3318024015530954739, guid: d6aee8016380e0b45842098ce76f39c1, type: 3}
+    - target: {fileID: 4846204745021538799, guid: ad6e8602905ea58468c5dfd0001cdcc2, type: 3}
+      propertyPath: obstaclePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 3531233919579389491, guid: 823ceed67d721a348b1c2e034b80ae9c, type: 3}
     - target: {fileID: 7045473578361442854, guid: ad6e8602905ea58468c5dfd0001cdcc2, type: 3}
       propertyPath: m_IsTrigger
       value: 1

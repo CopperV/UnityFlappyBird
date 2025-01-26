@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,11 +15,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playerPrefab;
 
+    [SerializeField, ReadOnly(true)]
+    private int points = 0;
+
     private GameObject localPlayer;
     public GameObject LocalPlayer {  get { return localPlayer; } }
 
     public static UnityAction StartGameEvent;
     public static UnityAction StopGameEvent;
+
+    public int Points => points;
+    public static UnityAction PointsChangeEvent;
 
     private void Awake()
     {

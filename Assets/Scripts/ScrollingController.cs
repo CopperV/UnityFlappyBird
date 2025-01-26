@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class BackgroundScroller : MonoBehaviour
+public class ScrollingController : MonoBehaviour
 {
-    [SerializeField, Min(0)]
-    private float scrollSpeed = 10;
+    [SerializeField]
+    private float minSpeed = 1f;
+    [SerializeField]
+    private float maxSpeed = 3.5f;
 
-    private float backgroundLength;
+    [SerializeField]
+    private int playerPointsTreshold = 100;
 
-    private SpriteRenderer backgroundRenderer;
+    [SerializeField]
+    private Transform scrollingTransform;
+
+    private float currentSpeed;
 
     private bool isScrolling = false;
 
-    private void Awake()
-    {
-    }
+    public Transform ScrollingTransform => scrollingTransform;
 
     private void OnEnable()
     {
@@ -31,36 +34,29 @@ public class BackgroundScroller : MonoBehaviour
         GameManager.PointsChangeEvent -= OnPlayerPointsChangeListener;
     }
 
-    private void Start()
-    {
-        backgroundRenderer = GetComponent<SpriteRenderer>();
-
-        backgroundLength = backgroundRenderer.bounds.size.x;
-    }
-
     private void Update()
     {
-        if(isScrolling)
-            UpdateBackground();
+        if (isScrolling)
+            Scroll();
     }
 
-
-    private void UpdateBackground()
+    private void Scroll()
     {
-        Vector3 moveVector = Time.deltaTime * scrollSpeed * Vector3.left;
-        transform.position += moveVector;
+        Vector3 moveVector = Time.deltaTime * currentSpeed * Vector3.left;
+        scrollingTransform.position += moveVector;
+    }
 
-        if (backgroundLength <= -transform.position.x)
-        {
-            float xOffset = backgroundLength + transform.position.x;
-            transform.position = new Vector3(xOffset, 0, 0);
-        }
+    private void UpdateSpeed()
+    {
+        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, Mathf.Clamp01((float)GameManager.Instance.Points / playerPointsTreshold));
     }
 
     #region Listeners
     private void OnGameStartListener()
     {
         isScrolling = true;
+
+        UpdateSpeed();
     }
 
     private void OnGameStopListener()
@@ -70,7 +66,7 @@ public class BackgroundScroller : MonoBehaviour
 
     private void OnPlayerPointsChangeListener()
     {
-
+        UpdateSpeed();
     }
     #endregion
 }
